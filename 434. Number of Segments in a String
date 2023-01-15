@@ -1,0 +1,52 @@
+class Solution {
+public:
+    int countSegments(string s) {
+        int count=0,j=0,i=0;
+        bool stat=0;
+
+        while(i<s.length())
+        {
+           if(j==0 && s[i]==' ')
+           {
+               i++;
+               continue;
+           }
+           else if(s[i]!=' ')
+           {
+               stat=1;
+               swap(s[j++],s[i++]);
+           }
+           else if(s[i]==' ' && j!=0)
+           {
+               if(s[j-1]==' ')
+               {
+                   i++;
+                   continue;
+               }
+               swap(s[j++],s[i++]);
+           }
+        }
+        if(stat==1 && s[j-1]==' ')
+        {
+            j=j-1;
+            s.resize(j);
+        }
+        s.resize(j);
+        
+        if(s.compare("")==0)
+        {
+            return count;
+        }
+
+        for(int i=0;i<s.length();i++)
+        {
+            if(s[i]==' ')
+            {
+              count++;
+            }
+        }
+        count++;
+        return count;
+    }
+};
+Console
