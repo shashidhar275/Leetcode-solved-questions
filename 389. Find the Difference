@@ -1,0 +1,28 @@
+class Solution {
+public:
+    char findTheDifference(string s, string t) {
+        int arr1[26],arr2[26],index;
+        char a='b';
+        fill_n(arr1,26,0);
+        fill_n(arr2,26,0);
+        for(int i=0;i<s.length();i++)
+        {
+            index=s[i]-'a';
+            arr1[index]++;
+        }
+        for(int i=0;i<t.length();i++)
+        {
+            index=t[i]-'a';
+            arr2[index]++;
+        }
+        for(int i=0;i<26;i++)
+        {
+            if(arr1[i]!=arr2[i])
+            {
+                a='a'+i;
+                return a;
+            }
+        }
+       return a;
+    }
+};
