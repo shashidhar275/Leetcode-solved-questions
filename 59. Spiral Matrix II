@@ -1,0 +1,43 @@
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) {
+        vector<vector<int>> matrix(n,vector<int> (n));
+        int fr=0,fc=0,lr=n-1,lc=n-1,j=1,count=0;
+        while(count<(n*n))
+        {
+            for(int i=fc;i<=lc && count<(n*n);i++)
+            {
+                matrix[fr][i]=j;
+                j++;
+                count++;
+            }
+            fr++;
+
+            for(int i=fr;i<=lr && count<(n*n);i++)
+            {
+                matrix[i][lc]=j;
+                j++;
+                count++;
+            }
+            lc--;
+
+            for(int i=lc;i>=fc  && count<(n*n);i--)
+            {
+                matrix[lr][i]=j;
+                j++;
+                count++;
+            }
+            lr--;
+
+            for(int i=lr;i>=fr  && count<(n*n);i--)
+            {
+                matrix[i][fc]=j;
+                j++;
+                count++;
+            }
+            fc++;
+        }
+        return matrix;
+
+    }
+};
