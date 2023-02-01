@@ -1,0 +1,65 @@
+class Solution {
+public:
+    long long makeSimilar(vector<int>& nums, vector<int>& target) {
+        vector<int> odd1,odd2,even1,even2;
+        sort(nums.begin(),nums.end());
+        sort(target.begin(),target.end());
+        for(int i=0;i<nums.size();i++)
+        {
+            if(nums[i]&1)
+            {
+                odd1.push_back(nums[i]);
+            }
+            else{
+                even1.push_back(nums[i]);
+            }
+        }
+
+        for(int i=0;i<target.size();i++)
+        {
+            if(target[i]&1)
+            {
+                odd2.push_back(target[i]);
+            }
+            else{
+                even2.push_back(target[i]);
+            }
+        }
+
+        long long int i=0,diff,plus=0,minus=0,ans;
+        while(i<odd1.size() && i<odd2.size())
+        {
+            if(odd1[i]!=odd2[i])
+            {
+              diff=odd1[i]-odd2[i];
+              if(diff>0)
+              {
+                 minus+=diff;
+              }
+              else{
+                  plus-=(-1 * diff);
+              }
+            }
+            i++;
+        }
+        
+        i=0;
+        while(i<even1.size() && i<even2.size())
+        {
+            if(even1[i]!=even2[i])
+            {
+                diff=even1[i]-even2[i];
+                if(diff>0)
+                {
+                    minus+=diff;
+                }
+                else{
+                    plus-=(-1 * diff);
+                }
+            }
+            i++;
+        }
+        ans=minus/2;
+        return ans;
+    }
+};
