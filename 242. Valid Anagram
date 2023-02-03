@@ -1,0 +1,33 @@
+class Solution {
+public:
+
+    bool isCondition(vector<int> arr1,vector<int> arr2)
+    {
+        for(int i=0;i<26;i++)
+        {
+            if(arr1[i]!=arr2[i])
+            {
+                return 0;
+            }
+        }
+        return 1;
+    }
+    bool isAnagram(string s, string t) {
+        vector<int> arr1(26,0),arr2(26,0);
+        for(int i=0;i<s.length();i++)
+        {
+            arr1[s[i]-'a']++;
+        }
+
+        for(int i=0;i<t.length();i++)
+        {
+            arr2[t[i]-'a']++;
+        }
+
+        if(isCondition(arr1,arr2))
+        {
+            return 1;
+        }
+        return 0;
+    }
+};
