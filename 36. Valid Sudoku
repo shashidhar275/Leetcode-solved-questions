@@ -1,0 +1,88 @@
+class Solution {
+public:
+
+    bool isCondition(vector<int> v)
+    {
+        for(int i=0;i<9;i++)
+        {
+          if(v[i]!=0 && v[i]!=1)
+          {
+              return 0;
+          }
+        }
+        return 1;
+    }
+
+    bool validate(vector<vector<char>>& board,int rs,int cs)
+    {
+        vector<int> v(9,0);
+      for(int i=rs;i<rs+3;i++)
+      {
+          for(int j=cs;j<cs+3;j++)
+          {
+              if(board[i][j]=='.')
+              {
+                  continue;
+              }
+             v[(board[i][j]-'0')-1]++;
+          }
+      }
+      if(isCondition(v)==0)
+      {
+          return 0;
+      }
+      return 1;
+    }
+
+
+    bool isValidSudoku(vector<vector<char>>& board) {
+        vector<int> v(9,0);
+        for(int i=0;i<9;i++)
+        {
+            for(int j=0;j<9;j++)
+            {
+                if(board[i][j]=='.')
+                {
+                    continue;
+                }
+                v[(board[i][j]-'0')-1]++;
+            }
+            if(isCondition(v)==0)
+            {
+                return 0;
+            }
+            fill_n(v.begin(),9,0);
+        }
+
+        for(int j=0;j<9;j++)
+        {
+            for(int i=0;i<9;i++)
+            {
+                if(board[i][j]=='.')
+                {
+                    continue;
+                }
+                v[(board[i][j]-'0')-1]++;
+            }
+            if(isCondition(v)==0)
+            {
+              return 0;
+            }
+            fill_n(v.begin(),9,0);
+        }
+        int rs,cs;
+        for(int i=0;i<9;i+=3)
+        {
+          for(int j=0;j<9;j+=3)
+          {
+              rs=i;
+              cs=j;
+              if(validate(board,rs,cs)==0)
+              {
+                  return 0;
+              }
+          }
+        }
+        return 1;
+    }
+};
