@@ -1,0 +1,33 @@
+class Solution {
+public:
+
+    int countDig(int a)
+    {
+        int count=0;
+        while(a!=0)
+        {
+            a/=10;
+            count++;
+        }
+        return count;
+    }
+    vector<int> separateDigits(vector<int>& nums) {
+        vector<int> ans;
+        int count,j=0,temp,size=0;
+        for(int i=0;i<nums.size();i++)
+        {
+            count=countDig(nums[i]);
+            size+=count;
+            ans.resize(size);
+            temp=count;
+            while(temp>0)
+            {
+                ans[j+(temp-1)]=nums[i]%10;
+                temp--;
+                nums[i]/=10;
+            }
+            j+=count;
+        }
+        return ans;
+    }
+};
