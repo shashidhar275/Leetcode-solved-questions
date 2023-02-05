@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<vector<int>> sortTheStudents(vector<vector<int>>& score, int k) {
+        vector<int> arr(score.size());
+        for(int i=0;i<score.size();i++)
+        {
+            arr[i]=score[i][k];
+        }
+        sort(arr.begin(), arr.end(), greater <>());
+        int i,j;
+        for(i=0;i<score.size();i++)
+        {
+            for(j=0;j<score.size();j++)
+            {
+                if(arr[i]==score[j][k])
+                {
+                    break;
+                }
+            }
+
+            for(int l=0;l<score[0].size();l++)
+            {
+                swap(score[i][l],score[j][l]);
+            }
+        }
+        return score;
+    }
+};
