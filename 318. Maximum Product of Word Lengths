@@ -1,0 +1,51 @@
+class Solution {
+public:
+    void arrCharfreq(string s,int arr[26])
+    {
+         for(int i=0;i<s.length();i++)
+         {
+             arr[s[i]-'a']++;
+         }
+    }
+    bool checkCondition(int arr[26],int arr1[26])
+    {
+        for(int i=0;i<26;i++)
+        {
+            if(arr[i]!=0 && arr1[i]!=0)
+            {
+                return 0;
+            }
+        }
+        return 1;
+    }
+    int maxProduct(vector<string>& words) {
+        int p,max=0,temp;
+        int arr[26],arr1[26];
+        fill_n(arr,26,0);
+        fill_n(arr1,26,0);
+        for(int i=0;i<words.size();i++)
+        {
+            arrCharfreq(words[i],arr);
+            for(int j=i+1;j<words.size();j++)
+            {
+                 temp=words[i].length()*words[j].length();
+                 if(temp<=max)
+                 {
+                   continue;
+                 }
+                arrCharfreq(words[j],arr1);
+                if(checkCondition(arr,arr1))
+                {
+                    p=words[i].size()*words[j].size();
+                    if(p>max)
+                    {
+                        max=p;
+                    }
+                }
+                fill_n(arr1,26,0);
+            }
+            fill_n(arr,26,0);
+        }
+        return max;
+    }
+};
