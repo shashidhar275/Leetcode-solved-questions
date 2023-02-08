@@ -1,0 +1,33 @@
+class Solution {
+public:
+
+    bool isalpha(string s)
+    {
+        for(int i=0;i<s.length();i++)
+        {
+            if(s[i]>='a' && s[i]<='z')
+            {
+                return 0;
+            }
+        }
+        return 1;
+    }
+    int maximumValue(vector<string>& strs) {
+        int n,max=0;
+        for(int i=0;i<strs.size();i++)
+        {
+            if(isalpha(strs[i]))
+            {
+               n=stoi(strs[i]);
+            }
+            else{
+                n=strs[i].length();
+            }
+            if(n>max)
+            {
+                max=n;
+            }
+        }
+        return max;
+    }
+};
