@@ -1,0 +1,35 @@
+class Solution {
+public:
+    bool checkAvg(int sum,int threshold,int k)
+    {
+        float avg=sum/k;
+        if(avg>=threshold)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    int numOfSubarrays(vector<int>& arr, int k, int threshold) {
+       int sum=0,i=0,count=0;
+       while(i<k)
+       {
+          sum+=arr[i++];
+       }
+       if(checkAvg(sum,threshold,k))
+       {
+          count++;
+       }
+       while(i<arr.size())
+       {
+           sum-=arr[i-k];
+           sum+=arr[i];
+           if(checkAvg(sum,threshold,k))
+           {
+               count++;
+           }
+           i++;
+       }
+       return count;
+    }
+};
