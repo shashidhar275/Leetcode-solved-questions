@@ -98,26 +98,19 @@ struct Node
 */
 class Solution{
     public:
-    void solve(struct Node* node,int count,int& ans)
-    {
-        if(node==NULL)
-        {
-            if(count>ans)
-            {
-                ans=count;
-            }
-            return ;
-        }
-        
-        count++;
-        solve(node->left,count,ans);
-        solve(node->right,count,ans);
-    }
     //Function to find the height of a binary tree.
     int height(struct Node* node){
-        int ans=0;
-        solve(node,0,ans);
+        if(node==NULL)
+        {
+            return 0;
+        }
+        
+        int left=height(node->left);
+        int right=height(node->right);
+        
+        int ans=max(left,right)+1;
         return ans;
+
     }
 };
 
