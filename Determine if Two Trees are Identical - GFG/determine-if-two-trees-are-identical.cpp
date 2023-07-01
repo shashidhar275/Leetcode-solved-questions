@@ -53,63 +53,62 @@ struct Node
 
 
    
+/* A binary tree node
+
+
+struct Node
+{
+    int data;
+    struct Node* left;
+    struct Node* right;
+    
+    Node(int x){
+        data = x;
+        left = right = NULL;
+    }
+};
+*/
+
+
+   
 class Solution
 {
     public:
-    int height1(Node* r1,vector<int>& arr1)
-    {
-        if(r1==NULL)
-        {
-            return 0;
-        }
-        
-        arr1.push_back(r1->data);
-        
-        int lH=height1(r1->left,arr1);
-        int rH=height1(r1->right,arr1);
-        
-        int ans=max(lH,rH)+1;
-        
-        return ans;
-        
-    }
-    int height2(Node* r2,vector<int>& arr2)
-    {
-        if(r2==NULL)
-        {
-            return 0;
-        }
-        
-        arr2.push_back(r2->data);
-        
-        int lH=height2(r2->left,arr2);
-        int rH=height2(r2->right,arr2);
-        
-        int ans=max(lH,rH)+1;
-        
-        return ans;
-    }
     //Function to check if two trees are identical.
     bool isIdentical(Node *r1, Node *r2)
     {
-        vector<int> arr1,arr2;
-        int h1=height1(r1,arr1);
-        int h2=height2(r2,arr2);
-        
-        if(arr1.size()!=arr2.size())
+        if(r1==NULL && r2==NULL)
+        {
+            return true;
+        }
+        if(r1!=NULL && r2==NULL)
         {
             return false;
         }
-        else{
-            for(int i=0;i<arr1.size();i++)
-            {
-                if(arr1[i]!=arr2[i])
-                {
-                    return false;
-                }
-            }
+        if(r1==NULL && r2!=NULL)
+        {
+            return false;
         }
-        return true;
+        
+        bool value;
+        if(r1->data==r2->data)
+        {
+            value=true;
+        }
+        else{
+            value=false;
+        }
+        
+        bool l=isIdentical(r1->left,r2->left);
+        bool r=isIdentical(r1->right,r2->right);
+        
+        if(value && l && r)
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 };
 
