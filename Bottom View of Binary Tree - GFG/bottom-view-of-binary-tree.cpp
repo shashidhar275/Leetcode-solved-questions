@@ -120,9 +120,11 @@ class Solution {
             }
         }
         vector<int> ans;
+        vector<int> :: iterator i;
         for(auto it: m)
         {
-            auto i=(it.second).end();
+            
+            i=(it.second).end();
             i--;
             ans.push_back(*i);
         }
