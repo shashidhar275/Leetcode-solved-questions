@@ -99,7 +99,7 @@ struct Node
 */
 class Solution{
     private: 
-    void findSumPath(Node* root,int sum,int k,int& ans,unordered_map<int,int>& m)
+    void solve(Node* root,int k,int sum,int& ans,unordered_map<int,int>& m)
     {
         if(root==NULL)
         {
@@ -118,7 +118,6 @@ class Solution{
             }
             return ;
         }
-        
         sum+=root->data;
         if(sum==k)
         {
@@ -129,17 +128,17 @@ class Solution{
             ans+=m[sum-k];
         }
         m[sum]++;
-        findSumPath(root->left,sum,k,ans,m);
-        findSumPath(root->right,sum,k,ans,m);
-        
+        solve(root->left,k,sum,ans,m);
+        solve(root->right,k,sum,ans,m);
         m[sum]--;
+        
     }
   public:
     int sumK(Node *root,int k)
     {
-        unordered_map<int,int> m;
         int ans=0,sum=0;
-        findSumPath(root,sum,k,ans,m);
+        unordered_map<int,int> m;
+        solve(root,k,sum,ans,m);
         return ans;
     }
 };
