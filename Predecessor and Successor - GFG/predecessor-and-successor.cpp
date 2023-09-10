@@ -39,80 +39,60 @@ struct Node
 class Solution
 {
     private:
-    void findInorderList(Node* root,vector<Node*>& v)
+    Node* findMax(Node* node)
     {
-        if(root==NULL)
+        Node* temp=node;
+        while(temp->right!=NULL)
         {
-            return ;
+            temp=temp->right;
         }
-        
-        findInorderList(root->left,v);
-        v.push_back(root);
-        findInorderList(root->right,v);
+        return temp;
+    }
+    Node* findMin(Node* node)
+    {
+        Node* temp=node;
+        while(temp->left!=NULL)
+        {
+            temp=temp->left;
+        }
+        return temp;
     }
     public:
     void findPreSuc(Node* root, Node*& pre, Node*& suc, int key)
     {
-        vector<Node*> v;
-        findInorderList(root,v);
-        if(v.size()==1)
+        pre=NULL;
+        suc=NULL;
+        Node* node=root;
+        while(node!=NULL && node->key!=key)
         {
-            if(key==v[0]->key)
+            if(key>node->key)
             {
-                pre=suc=NULL;
+                pre=node;
+                node=node->right;
             }
-            else if(key<v[0]->key)
+            else if(key<node->key)
             {
-                pre=NULL;
-                suc=v[0];
+                suc=node;
+                node=node->left;
             }
-            else {
-                pre=v[0];
-                suc=NULL;
-            }
-            return; 
         }
-        if(key==v[0]->key)
+        if(node==NULL)
         {
-            pre=NULL;
-            suc=v[1];
+            return ;
         }
-        else if(key<v[0]->key)
-        {
-            pre=NULL;
-            suc=v[0];
-        }
-        if(key==v[v.size()-1]->key)
-        {
-            pre=v[v.size()-2];
-            suc=NULL;
-        }
-        else if(key>v[v.size()-1]->key)
-        {
-            pre=v[v.size()-1];
-            suc=NULL;
-        }
-        int i;
-        for(i=1;i<v.size()-1;i++)
-        {
-            if(key==v[i]->key)
+        else{
+            if(node->left)
             {
-                pre=v[i-1];
-                suc=v[i+1];
+                Node* maxi=findMax(node->left);
+                pre=maxi;
             }
-            else if(key>v[i-1]->key && key<v[i]->key)
+            if(node->right)
             {
-                pre=v[i-1];
-                suc=v[i];
+                Node* mini=findMin(node->right);
+                suc=mini;
             }
+            return ;
         }
-        if(key>v[i-1]->key && key<v[i]->key)
-        {
-            pre=v[i-1];
-            suc=v[i];
-        }
-        
-        
     }
 };
 
